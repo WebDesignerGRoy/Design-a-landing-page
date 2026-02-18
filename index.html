@@ -1,0 +1,698 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClimateGuard | Smart Climate Monitoring</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #132F4B;
+            --primary-dark: #132F4B;
+            --secondary: #7CC5C6;
+            --dark: #1E293B;
+            --light: #F8FAFC;
+            --gray: #64748B;
+            --gradient: linear-gradient(135deg, #132F4B 0%, #7CC5C6 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+        
+        .gradient-text {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .gradient-bg {
+            background: var(--gradient);
+        }
+        
+        .section-padding {
+            padding: 5rem 1.5rem;
+        }
+        
+        .container-custom {
+            max-width: 1600px;
+            margin: 0 auto;
+            white-space: nowrap;
+        }
+        
+        .shadow-soft {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+        }
+        
+        .shadow-hard {
+            box-shadow: 0 20px 40px -10px rgba(42, 107, 255, 0.15);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px -12px rgba(42, 107, 255, 0.25);
+        }
+        
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            font-weight: 500;
+            display: inline-block;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(42, 107, 255, 0.2);
+        }
+        
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            font-weight: 500;
+            display: inline-block;
+            transition: all 0.3s ease;
+            background: transparent;
+            cursor: pointer;
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+        
+        .device-image {
+            max-width: 100%;
+            filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.1));
+        }
+        
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+        
+        .cookie-notice {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 1.5rem;
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transform: translateY(100%);
+            transition: transform 0.5s ease;
+        }
+        
+        .cookie-notice.active {
+            transform: translateY(0);
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 1s ease forwards;
+        }
+        
+        .animate-slide-up {
+            animation: slideUp 0.8s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 768px) {
+            .section-padding {
+                padding: 3rem 1rem;
+            }
+            
+            .stat-number {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Cookie Notice -->
+    <div id="cookieNotice" class="cookie-notice">
+        <div class="container-custom flex flex-col md:flex-row items-center justify-between">
+            <div class="mb-4 md:mb-0 md:mr-6">
+                <p class="text-gray-700">We use cookies to enhance your experience on our website. By continuing to browse, you agree to our use of cookies. <a href="#" class="text-primary font-medium">Learn more</a></p>
+            </div>
+            <div class="flex space-x-4">
+                <button id="cookieAccept" class="btn-primary">Accept All</button>
+                <button id="cookieSettings" class="btn-outline">Settings</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <header class="sticky top-0 z-50 bg-white shadow-soft">
+        <div class="container-custom py-4 px-6">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <img style="width: 20%;height: 20%;" src="https://i.postimg.cc/L6KgmhPn/logo.png" alt="logo">
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#features" class="text-gray-700 hover:text-primary font-medium transition">Features</a>
+                    <a href="#how-it-works" class="text-gray-700 hover:text-primary font-medium transition">How It Works</a>
+                    <a href="#applications" class="text-gray-700 hover:text-primary font-medium transition">Applications</a>
+                    <a href="#pricing" class="text-gray-700 hover:text-primary font-medium transition">Pricing</a>
+                    <div class="flex space-x-4">
+                        <a href="https://shop.climateguard.com" target="_blank" class="btn-outline">Shop</a>
+                        <a href="https://client.climateguard.com" target="_blank" class="btn-primary">Client Area</a>
+                    </div>
+                </nav>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuButton" class="md:hidden text-gray-700 text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="mobile-menu fixed top-0 right-0 h-full w-64 bg-white shadow-hard z-50 p-6">
+            <div class="flex justify-between items-center mb-8">
+                <div class="flex items-center">
+                    <div class="w-8 h-8 gradient-bg rounded-lg flex items-center justify-center mr-2">
+                        <i class="fas fa-thermometer-half text-white"></i>
+                    </div>
+                    <span class="text-xl font-bold text-gray-900">Climate<span class="gradient-text">Guard</span></span>
+                </div>
+                <button id="closeMobileMenu" class="text-gray-700 text-2xl">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <nav class="flex flex-col space-y-6">
+                <a href="#features" class="text-gray-700 hover:text-primary font-medium transition py-2">Features</a>
+                <a href="#how-it-works" class="text-gray-700 hover:text-primary font-medium transition py-2">How It Works</a>
+                <a href="#applications" class="text-gray-700 hover:text-primary font-medium transition py-2">Applications</a>
+                <a href="#pricing" class="text-gray-700 hover:text-primary font-medium transition py-2">Pricing</a>
+                <div class="pt-4 border-t border-gray-200">
+                    <a href="https://shop.climateguard.com" target="_blank" class="btn-outline w-full text-center mb-3">Shop</a>
+                    <a href="https://client.climateguard.com" target="_blank" class="btn-primary w-full text-center">Client Area</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="section-padding">
+        <div class="container-custom">
+            <div class="flex flex-col lg:flex-row items-center">
+                <div class="lg:w-1/2 mb-12 lg:mb-0 animate-fade-in">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">Smart Climate Monitoring <span class="gradient-text">Made Simple</span></h1>
+                    <p class="text-gray-600 text-lg mb-8">ClimateGuard monitors temperature, humidity, and dew point in your premises and alerts you when readings fall outside safe ranges. Perfect for both home and commercial use.</p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="https://shop.climateguard.com" target="_blank" class="btn-primary text-center">Order Now</a>
+                        <a href="#features" class="btn-outline text-center">Learn More</a>
+                    </div>
+                    <div class="mt-12 grid grid-cols-3 gap-6">
+                        <div>
+                            <div class="stat-number">24/7</div>
+                            <p class="text-gray-600">Monitoring</p>
+                        </div>
+                        <div>
+                            <div class="stat-number">99.9%</div>
+                            <p class="text-gray-600">Accuracy</p>
+                        </div>
+                        <div>
+                            <div class="stat-number">5min</div>
+                            <p class="text-gray-600">Setup Time</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 flex justify-center animate-slide-up">
+                    <img src="https://i.postimg.cc/vZXv1570/Image-08-02-2026-at-15-39.png" alt="ClimateGuard Device" class="device-image rounded-2xl shadow-hard">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="section-padding bg-white">
+        <div class="container-custom">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Advanced Climate Monitoring <span class="gradient-text">Features</span></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">ClimateGuard combines cutting-edge sensors with intelligent software to keep your environment perfectly balanced.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-gray-50 p-8 rounded-2xl card-hover animate-slide-up">
+                    <div class="feature-icon gradient-bg">
+                        <i class="fas fa-temperature-high text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Triple Sensor Technology</h3>
+                    <p class="text-gray-600">Simultaneously monitors temperature, humidity, and dew point with industry-leading accuracy.</p>
+                </div>
+                
+                <div class="bg-gray-50 p-8 rounded-2xl card-hover animate-slide-up" style="animation-delay: 0.1s">
+                    <div class="feature-icon gradient-bg">
+                        <i class="fas fa-bell text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Real-time Alerts</h3>
+                    <p class="text-gray-600">Get instant notifications via app, email, or SMS when conditions exceed your preset thresholds.</p>
+                </div>
+                
+                <div class="bg-gray-50 p-8 rounded-2xl card-hover animate-slide-up" style="animation-delay: 0.2s">
+                    <div class="feature-icon gradient-bg">
+                        <i class="fas fa-chart-line text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Data Analytics</h3>
+                    <p class="text-gray-600">Track historical data, identify trends, and generate reports through our intuitive dashboard.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="section-padding">
+        <div class="container-custom">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">How ClimateGuard <span class="gradient-text">Works</span></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Simple setup, powerful monitoring. Get started in minutes with our easy installation process.</p>
+            </div>
+            
+            <div class="flex flex-col lg:flex-row items-center mb-16">
+                <div class="lg:w-1/2 mb-10 lg:mb-0 lg:pr-12">
+                    <h3 class="text-2xl font-bold mb-4">Ceiling or Wall Mount</h3>
+                    <p class="text-gray-600 mb-6">ClimateGuard can be easily installed on ceilings for home use or on walls for commercial applications. The device blends seamlessly into any environment.</p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mt-1 mr-3"></i>
+                            <span>Includes mounting hardware for both options</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mt-1 mr-3"></i>
+                            <span>Wireless connectivity up to 100m range</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mt-1 mr-3"></i>
+                            <span>Battery or wired power options available</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="lg:w-1/2">
+                    <img src="https://i.postimg.cc/rySx0SMZ/Image-08-02-2026-at-16-26.png" alt="Device Installation" class="rounded-2xl shadow-hard">
+                </div>
+            </div>
+            
+            <div class="flex flex-col lg:flex-row-reverse items-center">
+                <div class="lg:w-1/2 mb-10 lg:mb-0 lg:pl-12">
+                    <h3 class="text-2xl font-bold mb-4">Connect & Monitor</h3>
+                    <p class="text-gray-600 mb-6">Download our mobile app, connect your ClimateGuard device, and start monitoring your environment in real-time. Set custom thresholds and receive alerts when needed.</p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mt-1 mr-3"></i>
+                            <span>Compatible with iOS and Android devices</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mt-1 mr-3"></i>
+                            <span>Web dashboard for desktop monitoring</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mt-1 mr-3"></i>
+                            <span>Multiple user access for businesses</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="lg:w-1/2">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Mobile App Interface" class="rounded-2xl shadow-hard">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Applications Section -->
+    <section id="applications" class="section-padding bg-white">
+        <div class="container-custom">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Perfect For <span class="gradient-text">Every Space</span></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">From homes to businesses, ClimateGuard ensures optimal climate conditions for health, safety, and comfort.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-gradient-to-br from-blue-50 to-cyan-50 p-8 rounded-2xl card-hover">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center mr-4 shadow-soft">
+                            <i class="fas fa-home text-primary text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">Home Use</h3>
+                    </div>
+                    <p class="text-gray-700 mb-6">Protect your family and home from mold, mildew, and discomfort caused by improper humidity and temperature levels. Ideal for living rooms, basements, bedrooms, and nurseries.</p>
+                    <div class="flex items-center text-gray-600">
+                        <i class="fas fa-check-circle text-secondary mr-2"></i>
+                        <span>Prevents mold growth in damp areas</span>
+                    </div>
+                    <div class="flex items-center text-gray-600 mt-2">
+                        <i class="fas fa-check-circle text-secondary mr-2"></i>
+                        <span>Ensures comfortable sleeping conditions</span>
+                    </div>
+                    <div class="flex items-center text-gray-600 mt-2">
+                        <i class="fas fa-check-circle text-secondary mr-2"></i>
+                        <span>Protects valuable items from humidity damage</span>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-8 rounded-2xl card-hover">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center mr-4 shadow-soft">
+                            <i class="fas fa-building text-primary text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">Commercial Use</h3>
+                    </div>
+                    <p class="text-gray-700 mb-6">Maintain optimal conditions for offices, warehouses, server rooms, laboratories, and retail spaces. Ensure compliance with industry standards and protect sensitive equipment.</p>
+                    <div class="flex items-center text-gray-600">
+                        <i class="fas fa-check-circle text-secondary mr-2"></i>
+                        <span>Protects sensitive equipment and inventory</span>
+                    </div>
+                    <div class="flex items-center text-gray-600 mt-2">
+                        <i class="fas fa-check-circle text-secondary mr-2"></i>
+                        <span>Ensures employee comfort and productivity</span>
+                    </div>
+                    <div class="flex items-center text-gray-600 mt-2">
+                        <i class="fas fa-check-circle text-secondary mr-2"></i>
+                        <span>Complies with industry regulations</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="section-padding">
+        <div class="container-custom">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Simple, Transparent <span class="gradient-text">Pricing</span></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Choose the plan that fits your needs. No hidden fees, no long-term contracts.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div class="bg-white p-8 rounded-2xl shadow-soft card-hover">
+                    <div class="text-center mb-8">
+                        <h3 class="text-xl font-bold mb-2">Starter</h3>
+                        <div class="flex justify-center items-baseline my-4">
+                            <span class="text-4xl font-bold">$99</span>
+                            <span class="text-gray-500 ml-2">/device</span>
+                        </div>
+                        <p class="text-gray-600">Perfect for single-room monitoring</p>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mt-1 mr-3"></i>
+                            <span>1 ClimateGuard device</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mt-1 mr-3"></i>
+                            <span>Basic mobile app access</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mt-1 mr-3"></i>
+                            <span>Email alerts</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mt-1 mr-3"></i>
+                            <span>7-day data history</span>
+                        </li>
+                    </ul>
+                    <a href="https://shop.climateguard.com/starter" target="_blank" class="btn-primary w-full text-center">Get Started</a>
+                </div>
+                
+                <div class="bg-white p-8 rounded-2xl shadow-hard card-hover relative border-2 border-primary">
+                    <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                        <span class="bg-primary text-white px-4 py-1 rounded-full text-sm font-medium">Most Popular</span>
+                    </div>
+                    <div class="text-center mb-8">
+                        <h3 class="text-xl font-bold mb-2">Professional</h3>
+                        <div class="flex justify-center items-baseline my-4">
+                            <span class="text-4xl font-bold">$249</span>
+                            <span class="text-gray-500 ml-2">/3 devices</span>
+                        </div>
+                        <p class="text-gray-600">Ideal for whole-home or small business</p>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mt-1 mr-3"></i>
+                            <span>3 ClimateGuard devices</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mt-1 mr-3"></i>
+                            <span>Advanced mobile & web dashboard</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mt-1 mr-3"></i>
+                            <span>Email & SMS alerts</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mt-1 mr-3"></i>
+                            <span>90-day data history</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mt-1 mr-3"></i>
+                            <span>Multi-user access</span>
+                        </li>
+                    </ul>
+                    <a href="https://shop.climateguard.com/professional" target="_blank" class="btn-primary w-full text-center">Get Professional</a>
+                </div>
+                
+                <div class="bg-white p-8 rounded-2xl shadow-soft card-hover">
+                    <div class="text-center mb-8">
+                        <h3 class="text-xl font-bold mb-2">Enterprise</h3>
+                        <div class="flex justify-center items-baseline my-4">
+                            <span class="text-4xl font-bold">Custom</span>
+                        </div>
+                        <p class="text-gray-600">For large-scale commercial deployments</p>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mt-1 mr-3"></i>
+                            <span>10+ ClimateGuard devices</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mt-1 mr-3"></i>
+                            <span>Custom dashboard & API access</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mt-1 mr-3"></i>
+                            <span>Priority phone support</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mt-1 mr-3"></i>
+                            <span>Unlimited data history</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mt-1 mr-3"></i>
+                            <span>Custom integrations</span>
+                        </li>
+                    </ul>
+                    <a href="https://shop.climateguard.com/enterprise" target="_blank" class="btn-outline w-full text-center">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container-custom">
+            <div class="flex flex-col md:flex-row justify-between items-start mb-8">
+                <div class="mb-8 md:mb-0">
+                    <div class="flex items-center mb-4">
+                        <img style="width: 20%;height: 20%;" src="https://i.postimg.cc/L6KgmhPn/logo.png" alt="logo">
+                    </div>
+                    <p class="text-gray-400 max-w-md">Smart climate monitoring for homes and businesses. Keep your environment perfectly balanced with our advanced sensor technology.</p>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+                    <div>
+                        <h4 class="font-bold text-lg mb-4">Product</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#features" class="text-gray-400 hover:text-white transition">Features</a></li>
+                            <li><a href="#how-it-works" class="text-gray-400 hover:text-white transition">How It Works</a></li>
+                            <li><a href="#applications" class="text-gray-400 hover:text-white transition">Applications</a></li>
+                            <li><a href="#pricing" class="text-gray-400 hover:text-white transition">Pricing</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-bold text-lg mb-4">Company</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">About Us</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Contact</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Blog</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Careers</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-bold text-lg mb-4">Support</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Help Center</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Documentation</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Community</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Status</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
+                <div class="text-gray-400 text-sm mb-4 md:mb-0">
+                    &copy; 2026 ClimateGuard. All rights reserved.
+                </div>
+                
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition">Terms & Conditions</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">Cookie Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const closeMobileMenu = document.getElementById('closeMobileMenu');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+        });
+        
+        closeMobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+        });
+        
+        // Close mobile menu when clicking on a link
+        const mobileMenuLinks = document.querySelectorAll('#mobileMenu a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+        
+        // Cookie Notice
+        const cookieNotice = document.getElementById('cookieNotice');
+        const cookieAccept = document.getElementById('cookieAccept');
+        const cookieSettings = document.getElementById('cookieSettings');
+        
+        // Check if user has already accepted cookies
+        if (!localStorage.getItem('cookiesAccepted')) {
+            // Show cookie notice after a short delay
+            setTimeout(() => {
+                cookieNotice.classList.add('active');
+            }, 1000);
+        }
+        
+        cookieAccept.addEventListener('click', () => {
+            localStorage.setItem('cookiesAccepted', 'true');
+            cookieNotice.classList.remove('active');
+        });
+        
+        cookieSettings.addEventListener('click', () => {
+            alert('Cookie settings would open here. In a real implementation, this would show a preferences modal.');
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                if (this.getAttribute('href') === '#') return;
+                
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-slide-up');
+                }
+            });
+        }, observerOptions);
+        
+        // Observe elements for animation
+        document.querySelectorAll('.card-hover').forEach((el, index) => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
